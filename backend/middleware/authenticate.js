@@ -7,12 +7,11 @@ var authenticate = (req, res, next) => {
     if (!user) {
       return Promise.reject();
     }
-
     req.user = user;
     req.token = token;
     next();
   }).catch((e) => {
-    res.status(401).send();
+    res.status(401).send({error: "Invalid requrest"});
   });
 };
 

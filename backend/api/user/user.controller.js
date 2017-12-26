@@ -16,18 +16,18 @@ class UserController{
     }
     
     async me(req, res) {
+        var user = req.user;
         res.send(req.user);
     }
 
     async login(req, res) {
         try {
-            const body = req.body;            
-            var user = await User.findByCredentials(body.email, body.password).then(a => {
-                console.log("goooo ", a );
-            });                        
-            const token = await user.generateAuthToken();            
+            const body = req.body;                        
+            var user = await User.findByCredentials(body.email, body.password);
+            const token = await user.generateAuthToken();
             res.header('x-auth', token).send(user);
-        } catch (e) {
+            res.send(user);
+        } catch (e) {            
             res.status(400).send(e);            
         }
     }

@@ -34,9 +34,8 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.methods.toJSON = function () {
   var user = this;
-  var userObject = user.toObject();
-
-  return _.pick(userObject, ['_id', 'email']);
+  var {_id, email} = user.toObject();
+  return {_id, email};
 };
 
 UserSchema.methods.generateAuthToken = async function () {
@@ -100,8 +99,10 @@ UserSchema.statics.findByCredentials = function (email, password) {
           reject({error:"Invalid credentials!"});
         }
       });
+
     });
   });
+  
 };
 
 UserSchema.pre('save', function (next) {
