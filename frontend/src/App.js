@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <Row>
-          <Col>                            
+          <Col xs={12} md={12}>                            
             <Nav bsStyle="pills">                    
               <LinkContainer to="/">
                 <NavItem>Home</NavItem>
@@ -23,9 +23,13 @@ class App extends Component {
             </Nav>                              
           </Col>                
         </Row>
-        <Switch>
-          <Route path="/" exact component={Index} />                  
-        </Switch>
+        <Row>
+          <Col xs={12} md={12}>
+            <Switch>
+              <Route path="/" exact component={Index} />                  
+            </Switch>
+          </Col>
+        </Row>
 
 
       </div>
