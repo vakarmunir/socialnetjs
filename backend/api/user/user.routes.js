@@ -5,6 +5,7 @@ var {authenticate} = require('../../middleware/authenticate');
 
 router.use(cors());
 var  UserController = require('./user.controller');
+
 userController = new UserController();
 router.get('/me' , authenticate , userController.me);
 router.post('/' , userController.create);
