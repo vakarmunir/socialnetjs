@@ -3,6 +3,7 @@ import {Grid , Row , Col , Alert , Nav , NavItem , Form, FormGroup, ControlLabel
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import * as axios from 'axios';
+import * as config from '../config/config';
 
 class Login extends Component {
   constructor(props){
@@ -31,8 +32,16 @@ class Login extends Component {
     password.value = e.target.value;
     this.setState({ password });
   }
-  login(){
-    axios.post();
+  async login(){
+    try{
+      var res = await axios.post(config.API_HOST + "user/login",{});      
+    }catch(e){
+      var email = {...this.state.email};
+      email.validationState = 'error';
+      var password = {...this.state.password};
+      password.validationState = 'error';
+      this.setState({email , password});
+    }    
   }
 
   render() {    
