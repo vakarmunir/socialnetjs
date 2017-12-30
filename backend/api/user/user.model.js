@@ -39,20 +39,19 @@ UserSchema.methods.toJSON = function () {
 };
 
 UserSchema.methods.generateAuthToken = async function () {
-  var user = this;
-  var access = 'auth';
-  var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();  
-  //user.tokens.push({access, token});
-  var us = await user.update({     
-      $push: {
-        tokens: {access, token}
-      }
-  });  
-  //await user.save();
-  return token;
-  /*return user.save().then(() => {
-    return token;
-  });*/
+  try{
+    var user = this;
+    var access = 'auth';
+    var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();  
+    var us = await user.update({     
+        $push: {
+          tokens: {access, token}
+        }
+    });      
+    return token;    
+  }catch(e){
+    return {error: "Auth Problem - Contact Admin"};
+  } 
 };
 
 UserSchema.methods.removeToken = function (token) {
@@ -93,7 +92,7 @@ UserSchema.statics.findByCredentials = function (email, password) {
     return new Promise((resolve, reject) => {
       // Use bcrypt.compare to compare password and user.password
       bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {                  
+        if (res) {
           resolve(user);
         } else {
           reject({error:"Invalid Password!" , errorFields : ['password']});

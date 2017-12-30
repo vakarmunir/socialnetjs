@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {Grid , Row , Col , Alert , Nav , NavItem , Form, FormGroup, ControlLabel, FormControl, Button , Well, HelpBlock} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import * as axios from 'axios';
 import * as config from '../config/config';
+import LoginHelper from '../core/LoginHelper';
+import Auth from '../core/Auth';
+import * as actionTypes from '../store/actions';
 
 class Login extends Component {
   
@@ -14,32 +18,24 @@ class Login extends Component {
       password : {value : '' , validationState : null},      
       message: { type : null, class : null, messages : [] }
     }
-  }
 
-  emailTextFieldHandler(e) {    
-    var email = {...this.state.email};
-    email.value = e.target.value;
-    this.setState({ email });
-  }
-  passwordFieldHandler(e) {    
-    var password = {...this.state.password};
-    password.value = e.target.value;
-    this.setState({ password });
+    var loginHelper = new LoginHelper();
+    this.handleLoginException = loginHelper.loginExpectionHandler.bind(this);
+    this.handleEmailText = loginHelper.emailTextFieldHandler;
+    this.handlePasswordText = loginHelper.passwordTextFieldHandler;
+    //console.log('user ==== ' , this.state);
   }
 
   async login(){
     try{
-      var res = await axios.post(`${config.API_HOST}/user/login`,{ email: this.state.email.value , password : this.state.password.value} );
-      console.log('res ======== ' , res);
+      var res = await axios.post(`${config.API_HOST}/user/login`,{ email: {...this.state.email} , password : {...this.state.password}} );
+      /*console.log("res ==== " , res);*/
+      localStorage.setItem('jwtToken' , res.headers['x-auth']);
+      let auth = new Auth();
+      auth.setAuthorization(res.headers['x-auth']);
+      this.props.setUser({ isAuthenticated: true, data: {...res.data} });
     }catch(e){
-      let res = e.response.data;
-      let email = res.email;
-      let password = res.password;            
-      let message = {...this.state.message};
-      message.type = 'error';
-      message.class = 'danger';      
-      message.messages = res.messages;      
-      this.setState({email , password , message});
+      this.handleLoginException(e);                  
     }
   }
 
@@ -60,18 +56,19 @@ class Login extends Component {
               <form>                                
                 <FormGroup controlId="email" validationState={this.state.email.validationState}>
                   <ControlLabel>Email</ControlLabel>
-                  <FormControl type="text" value={this.state.email.value} placeholder="Enter Email" onChange={this.emailTextFieldHandler.bind(this)} />
+                  <FormControl type="text" value={this.state.email.value} placeholder="Enter Email" onChange={this.handleEmailText.bind(this)} />
                   <FormControl.Feedback />                  
                 </FormGroup>
                 <FormGroup controlId="password" validationState={this.state.password.validationState}>
                   <ControlLabel>Password</ControlLabel>
-                  <FormControl type="password" value={this.state.password.value} placeholder="Enter Password" onChange={this.passwordFieldHandler.bind(this)} />
+                  <FormControl type="password" value={this.state.password.value} placeholder="Enter Password" onChange={this.handlePasswordText.bind(this)} />
                   <FormControl.Feedback />                  
                 </FormGroup>
                 <FormGroup controlId="login">
                   <Button bsStyle="primary" onClick={this.login.bind(this)}>Login</Button>                  
                 </FormGroup>
               </form>
+              {/*JSON.stringify(this.props.user)*/}
             </Well>                                      
           </Col>
         </Row>
@@ -80,4 +77,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+      setUser: (user) => dispatch( {type: actionTypes.SET_USER_AFTER_LOGIN, user} )      
+  }
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps , mapDispatchToProps) (Login);

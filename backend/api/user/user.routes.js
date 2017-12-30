@@ -3,7 +3,10 @@ var cors = require('cors');
 var router = express.Router();
 var {authenticate} = require('../../middleware/authenticate');
 
-router.use(cors());
+var corsOptions = {
+    exposedHeaders: ['x-auth']
+}
+router.use(cors(corsOptions));
 var  UserController = require('./user.controller');
 
 userController = new UserController();

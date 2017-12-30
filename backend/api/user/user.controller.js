@@ -21,39 +21,31 @@ class UserController{
     }
 
     async login(req, res) {
-
-        let response = {
-            email : {value : null , validationState : null},
-            password : {value : null, validationState : null},      
-            messages: []
-        };
-
+        let messages = [];
+        let response = {...req.body , messages};;
         const body = req.body;
-        if(!body.email && !body.password){
-            response.email.value = body.email;
-            response.email.validationState = 'error';
-            response.password.value = body.password;
-            response.password.validationState = 'error';            
+        if(!body.email.value && !body.password.value){            
+            response.email.validationState = response.password.validationState = 'error';            
             response.messages = ["Please Complete Form!"];
             return res.status(400).send(response);
         }
-                
         try {                                    
-            var user = await User.findByCredentials(body.email, body.password);
-            var token = await user.generateAuthToken();
-            token = "tttkkknnn";
-            var usr = {...user};
-            usr.token = token;            
-            //https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers
-            res.header('x-auth', token).send(usr);            
-        } catch (e) {     
-
-            e.errorFields.forEach(function(field) {                
-                response[field].value = body[field];
-                response[field].validationState = 'error';                
-            });
-            response.messages = [e.error];            
-            res.status(400).send(response);
+            var user = await User.findByCredentials(body.email.value, body.password.value);
+            var token = await user.generateAuthToken();            
+            res.header('x-auth', token).send(user);
+            res.send(user);            
+        } catch (e) {
+            if('error' in e)
+            {
+                e.errorFields.map((field) => {
+                    response[field].validationState = 'error';                
+                });
+                response.messages = [e.error];
+                response.password.value = '';                  
+                res.status(400).send(response);
+            }else{
+                res.status(400).send(e);
+            }                                     
         }
     }
     
