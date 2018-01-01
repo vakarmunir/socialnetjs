@@ -3,15 +3,33 @@ var {authenticate} = require('../../middleware/authenticate');
 var {ObjectId} = require('mongodb');
 
 class UserController{
-    async create(req, res) {
-        try {
-            const body = req.body;
-            const user = new User(body);
+    async create(req, res) {        
+        let messages = [];
+        let response = {...req.body , messages};;
+        const body = req.body;
+        if(!body.email.value && !body.password.value){            
+            response.email.validationState = response.password.validationState = 'error';            
+            response.messages = ["Please Complete Form!"];
+            return res.status(400).send(response);
+        }
+        try {                                    
+            const user = new User({email: body.email.value , password: body.password.value});
             await user.save();
-            const token = await user.generateAuthToken();
+            var token = await user.generateAuthToken();            
             res.header('x-auth', token).send(user);
+            res.send(user);            
         } catch (e) {
-            res.status(400).send(e);
+            if('error' in e)
+            {
+                e.errorFields.map((field) => {
+                    response[field].validationState = 'error';                
+                });
+                response.messages = [e.error];
+                response.password.value = '';                  
+                res.status(400).send(response);
+            }else{
+                res.status(400).send(e);
+            }                                     
         }
     }
     
@@ -52,7 +70,7 @@ class UserController{
     async deleteToken(req, res) {
         try {
             await req.user.removeToken(req.token);
-            res.status(200).send();
+            res.status(200).send({message : 'logout!'});
         } catch (e) {
             res.status(400).send();
         }

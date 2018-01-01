@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid , Row , Col , Alert , Nav , NavItem , Form, FormGroup, ControlLabel, FormControl, Button , Well, HelpBlock} from 'react-bootstrap';
+import {Grid , Row , Col , Button , Well, Panel , Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import * as axios from 'axios';
@@ -12,8 +12,30 @@ class Forum extends Component {
         return (
             <div className="Forum">
                 <Row>
-                    <Col xs={4} md={4}>
-                        thread......
+                    <Col xs={12} md={12}>
+                        <Panel header="Threads" bsStyle="primary">
+                            <Table responsive>
+                                <thead>
+                                    <tr>                                    
+                                        <th>Threads</th>
+                                        <th>Views</th>
+                                        <th>Author</th>                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>                                    
+                                        <td>Table cell</td>
+                                        <td>Table cell</td>
+                                        <td>Table cell</td>                                    
+                                    </tr>
+                                    <tr>
+                                        <td>Table cell</td>
+                                        <td>Table cell</td>                                    
+                                        <td>Table cell</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Panel>
                     </Col>
                 </Row>
             </div>    

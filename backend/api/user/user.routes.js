@@ -13,6 +13,6 @@ userController = new UserController();
 router.get('/me' , authenticate , userController.me);
 router.post('/' , userController.create);
 router.post('/login' , userController.login);
-router.delete('/me/token' , userController.deleteToken);
+router.delete('/me/token' , authenticate , userController.deleteToken);
 
 module.exports = router;

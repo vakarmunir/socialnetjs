@@ -5,20 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import * as axios from 'axios';
 import * as config from '../config/config';
-import LoginHelper from '../core/LoginHelper';
+import RegisterHelper from '../core/RegisterHelper';
 import Auth from '../core/Auth';
 import * as actionTypes from '../store/actions';
 import { Route , Redirect , Switch } from 'react-router-dom';
 
-import LoginContainer from '../containers/Login';
-class Login extends Component {
+import RegisterContainer from '../containers/Register';
+class Register extends Component {
     render() {
         return (
-            <div className="LoignPage">
-                {this.props.user.isAuthenticated === true ? <Switch><Redirect from="/login" to="/" /></Switch> : "" }
+            <div className="RegisterPage">
+                {this.props.user.isAuthenticated === true ? <Switch><Redirect from="/register" to="/" /></Switch> : "" }
                 <Row>
                     <Col xs={12} md={12}>
-                        <LoginContainer />                          
+                        <RegisterContainer />                          
                     </Col>
                 </Row>
             </div>    
@@ -38,5 +38,5 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps , mapDispatchToProps) (Login);
+export default connect(mapStateToProps , mapDispatchToProps) (Register);
   

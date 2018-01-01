@@ -1,8 +1,7 @@
 import * as actionTypes from './../actions';
 
 const initialState = {
-    isAuthenticated: false,
-    data: {}
+    threads: []    
 };
 
 const reducer = ( state = initialState, action ) => {

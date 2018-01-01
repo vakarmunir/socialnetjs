@@ -3,7 +3,9 @@ import { Route , Redirect , Switch } from 'react-router-dom';
 import {Grid , Row , Col , Alert , Nav , NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Forum from './pages/Forum';
+import AppHeader from './containers/AppHeader';
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
@@ -15,30 +17,15 @@ class App extends Component {
 
         <Row>
         <Col xs={12} md={12}>
-          <h2>ForumJS</h2>
+          <AppHeader />
         </Col>          
-        </Row>
-        <Row>
-          <Col xs={12} md={12}>                            
-            <Nav bsStyle="tabs">
-              <LinkContainer to="/login">
-                <NavItem>Login</NavItem>
-              </LinkContainer>                    
-              <LinkContainer to="/register">
-                <NavItem>Register</NavItem>
-              </LinkContainer>                    
-              <LinkContainer to="/forum">
-                <NavItem>Forum</NavItem>
-              </LinkContainer>                    
-            </Nav>                              
-          </Col>                
-        </Row>
+        </Row>        
         <Row>
           <Col xs={12} md={12}>
             <Switch>
               <Route path="/login" component={Login} />
-              <Route path="/forum" component={Forum} />
-              <Redirect from="/" to="/login" />                  
+              <Route path="/register" component={Register} />
+              <Route path="/" component={Forum} />                                
             </Switch>
           </Col>
         </Row>

@@ -12,7 +12,7 @@ export default class AppBootstrap{
                 res => {
                     console.log("userx === " , res);
                     let user  = { isAuthenticated: true, data: {...res.data} };
-                    store.dispatch( {type: actionTypes.SET_USER_AFTER_LOGIN , user } );
+                    store.dispatch( {type: actionTypes.SET_USER_AUTH , user } );
                 },
                 error => {
                     console.log("error loading me === " , error);                    
