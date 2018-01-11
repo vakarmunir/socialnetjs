@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Route , Redirect , Switch } from 'react-router-dom';
+import { Route , Redirect , Switch , withRouter } from 'react-router-dom';
 import {Navbar , Nav , NavItem , NavDropdown , MenuItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import Auth from '../core/Auth';
@@ -25,18 +25,10 @@ class AppHeader extends Component {
         });                        
     }
     render() {
-        const userNavItems = (
+        
+        let navItems = (
             <Nav pullRight>
-                <NavItem>Welcome! {this.props.user.data.email}</NavItem>
-                <LinkContainer to="/">
-                    <NavItem>Home</NavItem>
-                </LinkContainer>                
-                <NavItem onClick={ (e) => {this.logout(e)} }>Logout</NavItem>
-            </Nav>
-        );
-        const guestNavItems = (
-            <Nav pullRight>
-                <LinkContainer to="/">
+                <LinkContainer exact to="/">
                     <NavItem>Home</NavItem>
                 </LinkContainer>
                 <LinkContainer to="/login">
@@ -47,6 +39,18 @@ class AppHeader extends Component {
                 </LinkContainer>
             </Nav>
         );
+        if(this.props.user.isAuthenticated){
+            navItems = (
+                <Nav pullRight>
+                    <NavItem>Welcome! {this.props.user.data.email}</NavItem>
+                    <LinkContainer exact to="/">
+                        <NavItem>Home</NavItem>
+                    </LinkContainer>                
+                    <NavItem onClick={ (e) => {this.logout(e)} }>Logout</NavItem>
+                </Nav>
+            );
+        }
+
         return (
             <div className="AppHeader">
                 <Navbar inverse fluid={true}>
@@ -57,7 +61,7 @@ class AppHeader extends Component {
                         <Navbar.Toggle />                        
                     </Navbar.Header>                    
                     <Navbar.Collapse>                        
-                        {this.props.user.isAuthenticated ? userNavItems : guestNavItems}
+                        {navItems}
                     </Navbar.Collapse>
                 </Navbar>
             </div>
@@ -75,4 +79,4 @@ const mapStateToProps = state => {
       user: state.user
     };
   };  
-export default connect(mapStateToProps , mapDispatchToProps)(AppHeader);
+export default withRouter(connect(mapStateToProps , mapDispatchToProps)(AppHeader));

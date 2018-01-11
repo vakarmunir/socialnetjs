@@ -7,10 +7,13 @@ export default class AppBootstrap{
     constructor(store){        
         let auth = new Auth();
         if('jwtToken' in localStorage){
+
+            let user  = { isAuthenticated: true };
+            store.dispatch( {type: actionTypes.SET_USER_AUTH , user } );
+
             auth.setAuthorization(localStorage.getItem('jwtToken'));
             this.fetchUser().then(
-                res => {
-                    console.log("userx === " , res);
+                res => {                    
                     let user  = { isAuthenticated: true, data: {...res.data} };
                     store.dispatch( {type: actionTypes.SET_USER_AUTH , user } );
                 },

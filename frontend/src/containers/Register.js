@@ -73,8 +73,7 @@ class Register extends Component {
                 <FormGroup controlId="register">
                   <Button bsStyle="primary" onClick={this.register.bind(this)}>Register</Button>                  
                 </FormGroup>
-              </form>
-              {JSON.stringify(this.props.user)}
+              </form>              
             </Well>                                      
           </Col>
         </Row>

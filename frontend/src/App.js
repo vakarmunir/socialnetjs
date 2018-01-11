@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Route , Redirect , Switch } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { Route , Redirect , Switch , withRouter } from 'react-router-dom';
 import {Grid , Row , Col , Alert , Nav , NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import Login from './pages/Login';
@@ -10,8 +11,17 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-class App extends Component {
+class App extends Component {  
   render() {
+
+    let routes = (
+      <Switch>
+        <Route path="/login" render={props => !this.props.user.isAuthenticated ? <Login/> : <Redirect to="/" />} />
+        <Route path="/register" render={props => !this.props.user.isAuthenticated ? <Register /> : <Redirect to="/" />} />
+        <Route exact path="/" component={Forum} />                                        
+      </Switch>
+    );
+
     return (
       <div className="container">
 
@@ -22,11 +32,7 @@ class App extends Component {
         </Row>        
         <Row>
           <Col xs={12} md={12}>
-            <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/" component={Forum} />                                
-            </Switch>
+            {routes}
           </Col>
         </Row>
       </div>
@@ -34,4 +40,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user : state.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(App));

@@ -15,7 +15,6 @@ class Login extends Component {
     render() {
         return (
             <div className="LoignPage">
-                {this.props.user.isAuthenticated === true ? <Switch><Redirect from="/login" to="/" /></Switch> : "" }
                 <Row>
                     <Col xs={12} md={12}>
                         <LoginContainer />                          

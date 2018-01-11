@@ -15,7 +15,6 @@ class Register extends Component {
     render() {
         return (
             <div className="RegisterPage">
-                {this.props.user.isAuthenticated === true ? <Switch><Redirect from="/register" to="/" /></Switch> : "" }
                 <Row>
                     <Col xs={12} md={12}>
                         <RegisterContainer />                          
