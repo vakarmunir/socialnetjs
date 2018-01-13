@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route , Redirect , Switch , withRouter } from 'react-router-dom';
-import {Grid , Row , Col , Alert , Nav , NavItem} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
+import {Row , Col } from 'react-bootstrap';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Forum from './pages/Forum';
 import AppHeader from './containers/AppHeader';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 

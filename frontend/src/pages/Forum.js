@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import {Grid , Row , Col , Button , Well, Panel , Table} from 'react-bootstrap';
+import {Row , Col , Panel , Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import * as axios from 'axios';
-import * as config from '../config/config';
-import LoginHelper from '../core/LoginHelper';
-import Auth from '../core/Auth';
 
 class Forum extends Component {
     render() {

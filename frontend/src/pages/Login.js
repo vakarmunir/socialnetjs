@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {Grid , Row , Col , Alert , Nav , NavItem , Form, FormGroup, ControlLabel, FormControl, Button , Well, HelpBlock} from 'react-bootstrap';
+import {Row , Col } from 'react-bootstrap';
+import * as actionTypes from '../store/actions';
+import LoginContainer from '../containers/Login';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import * as axios from 'axios';
-import * as config from '../config/config';
-import LoginHelper from '../core/LoginHelper';
-import Auth from '../core/Auth';
-import * as actionTypes from '../store/actions';
-import { Route , Redirect , Switch } from 'react-router-dom';
 
-import LoginContainer from '../containers/Login';
 class Login extends Component {
     render() {
         return (
@@ -38,4 +34,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps , mapDispatchToProps) (Login);
-  

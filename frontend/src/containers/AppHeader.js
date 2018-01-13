@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Route , Redirect , Switch , withRouter } from 'react-router-dom';
-import {Navbar , Nav , NavItem , NavDropdown , MenuItem} from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
+import {Navbar , Nav , NavItem } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import Auth from '../core/Auth';
 import * as actionTypes from '../store/actions';
@@ -56,7 +56,7 @@ class AppHeader extends Component {
                 <Navbar inverse fluid={true}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="#">ForumJS</a>
+                            ForumJS
                         </Navbar.Brand>
                         <Navbar.Toggle />                        
                     </Navbar.Header>                    

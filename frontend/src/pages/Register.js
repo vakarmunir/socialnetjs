@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {Grid , Row , Col , Alert , Nav , NavItem , Form, FormGroup, ControlLabel, FormControl, Button , Well, HelpBlock} from 'react-bootstrap';
+import { Row , Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import * as axios from 'axios';
-import * as config from '../config/config';
-import RegisterHelper from '../core/RegisterHelper';
-import Auth from '../core/Auth';
 import * as actionTypes from '../store/actions';
-import { Route , Redirect , Switch } from 'react-router-dom';
 
 import RegisterContainer from '../containers/Register';
 class Register extends Component {
