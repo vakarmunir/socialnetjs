@@ -7,7 +7,8 @@ import * as axios from 'axios';
 import * as config from '../config/config';
 import LoginHelper from '../core/LoginHelper';
 import Auth from '../core/Auth';
-import * as actionTypes from '../store/actions';
+/*import * as actionTypes from '../store/actions';*/
+import * as actions from '../store/actions/index'
 
 class Login extends Component {
   
@@ -37,7 +38,7 @@ class Login extends Component {
       localStorage.setItem('jwtToken' , res.headers['x-auth']);
       let auth = new Auth();
       auth.setAuthorization(res.headers['x-auth']);
-      this.props.setUser({ isAuthenticated: true, data: {...res.data} });      
+      this.props.login({ isAuthenticated: true, data: {...res.data} });      
     }catch(e){
       this.handleLoginException(e);                  
     }
@@ -82,7 +83,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-      setUser: (user) => dispatch( {type: actionTypes.SET_USER_AUTH, user} )      
+      login: (user) => dispatch( actions.login(user) )      
   }
 };
 
