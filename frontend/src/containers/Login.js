@@ -7,7 +7,6 @@ import * as axios from 'axios';
 import * as config from '../config/config';
 import LoginHelper from '../core/LoginHelper';
 import Auth from '../core/Auth';
-/*import * as actionTypes from '../store/actions';*/
 import * as actions from '../store/actions/index'
 
 class Login extends Component {
@@ -24,7 +23,7 @@ class Login extends Component {
     this.handleLoginException = loginHelper.loginExpectionHandler.bind(this);
     this.handleEmailText = loginHelper.emailTextFieldHandler;
     this.handlePasswordText = loginHelper.passwordTextFieldHandler;
-    //console.log('user ==== ' , this.state);
+    
   }
 
   componentDidMount(){
@@ -32,24 +31,15 @@ class Login extends Component {
   }
 
   async login(){
-    try{
-      var res = await axios.post(`${config.API_HOST}/user/login`,{ email: {...this.state.email} , password : {...this.state.password}} );
-      /*console.log("res ==== " , res);*/
-      localStorage.setItem('jwtToken' , res.headers['x-auth']);
-      let auth = new Auth();
-      auth.setAuthorization(res.headers['x-auth']);
-      this.props.login({ isAuthenticated: true, data: {...res.data} });      
-    }catch(e){
-      this.handleLoginException(e);                  
-    }
+    this.props.login( { email: {...this.state.email} , password : {...this.state.password}} );    
   }
 
   render() {    
         
     let alert = null;
-    if(this.state.message.type) {      
-      let alertMessages = this.state.message.messages.map( (msg , i) => <p key={i}>{msg}</p> );
-      alert = <Alert bsStyle={this.state.message.class}>{alertMessages}</Alert>
+    if(this.props.user.data.message.type) {      
+      let alertMessages = this.props.user.data.message.messages.map( (msg , i) => <p key={i}>{msg}</p> );
+      alert = <Alert bsStyle={this.props.user.data.message.type === "error" ? "danger" : "alert-message"}>{alertMessages}</Alert>
     }
 
     return (
@@ -59,12 +49,12 @@ class Login extends Component {
             <Well bsSize="large">
               {alert}
               <form>                                
-                <FormGroup controlId="email" validationState={this.state.email.validationState}>
+                <FormGroup controlId="email" validationState={this.props.user.data.email.validationState}>
                   <ControlLabel>Email</ControlLabel>
                   <FormControl type="text" value={this.state.email.value} placeholder="Enter Email" onChange={this.handleEmailText.bind(this)} />
                   <FormControl.Feedback />                  
                 </FormGroup>
-                <FormGroup controlId="password" validationState={this.state.password.validationState}>
+                <FormGroup controlId="password" validationState={this.props.user.data.password.validationState}>
                   <ControlLabel>Password</ControlLabel>
                   <FormControl type="password" value={this.state.password.value} placeholder="Enter Password" onChange={this.handlePasswordText.bind(this)} />
                   <FormControl.Feedback />                  
@@ -72,7 +62,8 @@ class Login extends Component {
                 <FormGroup controlId="login">
                   <Button bsStyle="primary" onClick={this.login.bind(this)}>Login</Button>                  
                 </FormGroup>
-              </form>              
+              </form>
+              {/*JSON.stringify(this.props.user)*/}              
             </Well>                                      
           </Col>
         </Row>

@@ -4,6 +4,8 @@ import {BrowserRouter} from 'react-router-dom';
 import { createStore , combineReducers , compose , applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import * as userWatcher from './store/sagas/index';
 
 import './index.css';
 import App from './App';
@@ -19,7 +21,10 @@ process.env.NODE_ENV === "development" && window.__REDUX_DEVTOOLS_EXTENSION_COMP
 const rootReducer = combineReducers({
     user    
 });
-const store = createStore( rootReducer , composeEnhancers(applyMiddleware(thunk)) );
+
+const sagaMiddleWare = createSagaMiddleware();
+const store = createStore( rootReducer , composeEnhancers(applyMiddleware(thunk , sagaMiddleWare)) );
+sagaMiddleWare.run(userWatcher.watchAuth);
 
 let appBootstrap = new AppBootstrap(store);
 

@@ -2,13 +2,14 @@ export default class LoginHelper {
     emailTextFieldHandler(e) {    
         var email = {...this.state.email};
         email.value = e.target.value;
-        this.setState({ email });
+        this.setState({ email });        
     }
     passwordTextFieldHandler(e) {    
         var password = {...this.state.password};
         password.value = e.target.value;
         this.setState({ password });
       }
+
     loginExpectionHandler(e){
         let res = e.response.data;
         if( 'email' in res ){
@@ -25,7 +26,8 @@ export default class LoginHelper {
             message.class = 'danger';      
             message.messages = res.messages;      
 
-            this.setState({ email , password , message});
+            //this.setState({ email , password , message});
+            return { email , password , message};
         }else{        
             let message = {...this.state.message};        
             message.type = 'error';

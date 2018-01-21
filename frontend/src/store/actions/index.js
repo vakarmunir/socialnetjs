@@ -1,3 +1,5 @@
 export {
-    login
+    login,
+    logout,
+    setUserAuth
 } from './user';

@@ -1,6 +1,6 @@
 import Auth from './core/Auth';
 import * as config from './config/config';
-import * as actionTypes from './store/actions';
+import * as actions from './store/actions/index';
 import axios from 'axios';
 
 export default class AppBootstrap{
@@ -8,14 +8,13 @@ export default class AppBootstrap{
         let auth = new Auth();
         if('jwtToken' in localStorage){
 
-            let user  = { isAuthenticated: true };
-            store.dispatch( {type: actionTypes.SET_USER_AUTH , user } );
-
+            let user  = { isAuthenticated: true , data:null , profile:{email:""} };            
+            store.dispatch( actions.setUserAuth(user) );
             auth.setAuthorization(localStorage.getItem('jwtToken'));
             this.fetchUser().then(
                 res => {                    
-                    let user  = { isAuthenticated: true, data: {...res.data} };
-                    store.dispatch( {type: actionTypes.SET_USER_AUTH , user } );
+                    let user  = { isAuthenticated: true, data:null , profile: {...res.data} };
+                    store.dispatch( actions.setUserAuth(user) );                    
                 },
                 error => {
                     console.log("error loading me === " , error);                    

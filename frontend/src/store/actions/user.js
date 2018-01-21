@@ -6,3 +6,15 @@ export const login = (user) => {
         user: user
     }
 }
+export const logout = () => {
+    return {
+        type: actionTypes.USER_LOGOUT        
+    }
+}
+
+export const setUserAuth = (user) => {
+    return {
+        type : actionTypes.SET_USER_AUTH ,
+        user       
+    }
+}
