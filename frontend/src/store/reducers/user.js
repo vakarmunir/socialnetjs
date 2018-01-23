@@ -4,6 +4,7 @@ const initialState = () => {
     return {
         isAuthenticated: false,
         data: {
+            authInProcess : false,
             email : {value : '' , validationState : null},
             password : {value : '' , validationState : null},      
             message: { type : null, class : null, messages : [] }
@@ -14,6 +15,10 @@ const initialState = () => {
 
 const reducer = ( state = {...initialState()}, action ) => {
     switch ( action.type ) {
+        case actionTypes.AUTH_IN_PROCESS:
+            const newState = {...state};             
+            newState.data.authInProcess = action.authInProcessFlag;           
+            return {...newState}
         case actionTypes.USER_LOGOUT:            
             return {...initialState()};
         case actionTypes.SET_USER_AUTH:

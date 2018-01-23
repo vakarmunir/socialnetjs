@@ -6,6 +6,7 @@ import LoginHelper from '../../core/LoginHelper';
 import * as actions from '../actions/index';
 
 export function* authUserSaga(action){
+    yield put( actions.authInProcess(true) );
     const {email , password} = action.user;    
     try{
       var res = yield axios.post(`${config.API_HOST}/user/login`, {email , password} );            
@@ -24,5 +25,6 @@ export function* authUserSaga(action){
         message:{type:'error' , messages: [...res.data.messages] }
       }
       yield put( actions.setUserAuth( { isAuthenticated: false, data  , profile : null} ) );
-    }    
+    }
+    yield put( actions.authInProcess(false) );    
 }

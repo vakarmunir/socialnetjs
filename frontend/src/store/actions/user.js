@@ -18,3 +18,10 @@ export const setUserAuth = (user) => {
         user       
     }
 }
+
+export const authInProcess = (authInProcessFlag) => {
+    return {
+        type : actionTypes.AUTH_IN_PROCESS ,
+        authInProcessFlag       
+    }
+}

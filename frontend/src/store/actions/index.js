@@ -1,5 +1,6 @@
 export {
     login,
     logout,
-    setUserAuth
+    setUserAuth,
+    authInProcess
 } from './user';

@@ -15,12 +15,10 @@ class Login extends Component {
     super(props);
     this.state = {
       email : {value : '' , validationState : null},
-      password : {value : '' , validationState : null},      
-      message: { type : null, class : null, messages : [] }
+      password : {value : '' , validationState : null}            
     }
 
-    var loginHelper = new LoginHelper();
-    this.handleLoginException = loginHelper.loginExpectionHandler.bind(this);
+    var loginHelper = new LoginHelper();    
     this.handleEmailText = loginHelper.emailTextFieldHandler;
     this.handlePasswordText = loginHelper.passwordTextFieldHandler;
     
@@ -42,6 +40,8 @@ class Login extends Component {
       alert = <Alert bsStyle={this.props.user.data.message.type === "error" ? "danger" : "alert-message"}>{alertMessages}</Alert>
     }
 
+    let isLoginBtnDisabled = this.props.authInProcess;
+
     return (
       <div className="Login">        
         <Row>
@@ -60,10 +60,10 @@ class Login extends Component {
                   <FormControl.Feedback />                  
                 </FormGroup>
                 <FormGroup controlId="login">
-                  <Button bsStyle="primary" onClick={this.login.bind(this)}>Login</Button>                  
+                  <Button bsStyle="primary" onClick={this.login.bind(this)} disabled={isLoginBtnDisabled}>Login</Button>                  
                 </FormGroup>
               </form>
-              {/*JSON.stringify(this.props.user)*/}              
+              {/*JSON.stringify(this.props.user)*/}                            
             </Well>                                      
           </Col>
         </Row>
@@ -80,7 +80,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    authInProcess : state.user.data.authInProcess
   };
 };
 
