@@ -1,5 +1,11 @@
 import * as actionTypes from './actionTypes';
 
+export const register = (user) => {
+    return {
+        type: actionTypes.REGISTER_USER,
+        user: user
+    }
+}
 export const login = (user) => {
     return {
         type: actionTypes.AUTH_USER,
