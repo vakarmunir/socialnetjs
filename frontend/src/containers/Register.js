@@ -7,7 +7,7 @@ import * as axios from 'axios';
 import * as config from '../config/config';
 import RegisterHelper from '../core/RegisterHelper';
 import Auth from '../core/Auth';
-import * as actionTypes from '../store/actions';
+import * as actions from '../store/actions/index';
 
 class Register extends Component {
   

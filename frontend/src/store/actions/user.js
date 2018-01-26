@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-export const register = (user) => {
+export const register = (user) => {    
     return {
         type: actionTypes.REGISTER_USER,
         user: user
@@ -17,17 +17,15 @@ export const logout = () => {
         type: actionTypes.USER_LOGOUT        
     }
 }
-
 export const setUserAuth = (user) => {
     return {
-        type : actionTypes.SET_USER_AUTH ,
+        type : actionTypes.SET_USER_AUTH,
         user       
     }
 }
-
 export const authInProcess = (authInProcessFlag) => {
     return {
-        type : actionTypes.AUTH_IN_PROCESS ,
+        type : actionTypes.AUTH_IN_PROCESS,
         authInProcessFlag       
     }
 }

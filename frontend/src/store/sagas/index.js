@@ -5,4 +5,5 @@ import * as userSagas from './user';
 export function* watchAuth()
 {
     yield takeEvery(actionTypes.AUTH_USER , userSagas.authUserSaga);
+    yield takeEvery(actionTypes.REGISTER_USER , userSagas.registerUserSaga);
 }
