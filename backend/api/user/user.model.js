@@ -12,13 +12,13 @@ var UserSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: '"{VALUE}" is not a valid email'
+      message: '‒ "{VALUE}" is not a valid email'
     }
   },
   password: {
     type: String,
     require: true,
-    minlength: 6
+    minlength: [6 , "‒ Password required atleast 6 characters"]
   },
   tokens: [{
     access: {
