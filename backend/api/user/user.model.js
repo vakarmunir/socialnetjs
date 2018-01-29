@@ -10,10 +10,19 @@ var UserSchema = new mongoose.Schema({
     trim: true,
     minlength: 1,
     unique: true,
-    validate: {
-      validator: validator.isEmail,
-      message: '‒ "{VALUE}" is not a valid email'
-    }
+    validate: [
+      {
+        validator: validator.isEmail,
+        message: '‒ "{VALUE}" is not a valid email'
+      },{
+        validator: function(v, cb) {
+          User.find({email: v}, function(err,docs){            
+            cb(docs.length == 0);
+          });
+        },
+        message: '‒ Email "{VALUE}" already exist!'
+      }
+    ]
   },
   password: {
     type: String,
