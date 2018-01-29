@@ -42,7 +42,7 @@ class AppHeader extends Component {
         if(this.props.user.isAuthenticated){
             navItems = (
                 <Nav pullRight>
-                    <NavItem>Welcome! {this.props.user.profile.email}</NavItem>
+                    <NavItem>Welcome! {this.props.user.profile.displayname}</NavItem>
                     <LinkContainer exact to="/">
                         <NavItem>Home</NavItem>
                     </LinkContainer>                

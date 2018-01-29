@@ -3,21 +3,22 @@ import * as actionTypes from './../actions/actionTypes';
 const initialState = () => {
     return {
         isAuthenticated: false,
-        data: {
-            authInProcess : false,
+        authInProcess : false,
+        data: {            
             email : {value : '' , validationState : null},
             password : {value : '' , validationState : null},      
             message: { type : null, class : null, messages : [] }
         },
-        profile: {email : ''}
+        email: '',
+        profile: {displayname : ''}
     }
 };
 
 const reducer = ( state = {...initialState()}, action ) => {
     switch ( action.type ) {
         case actionTypes.AUTH_IN_PROCESS:
-            const newState = {...state};             
-            newState.data.authInProcess = action.authInProcessFlag;           
+            const newState = {...state};                         
+            newState.authInProcess = action.authInProcessFlag;           
             return {...newState}
         case actionTypes.USER_LOGOUT:            
             return {...initialState()};
@@ -30,7 +31,7 @@ const reducer = ( state = {...initialState()}, action ) => {
             }else if(action.user.profile !== null){
                 const isAuthenticated = action.user.isAuthenticated;
                 const profile = {...action.user.profile};
-                return {...state , isAuthenticated , profile}
+                return {...state , ...action.user , profile}
             }else{                
                 return {...state , ...action.user}                
             }            

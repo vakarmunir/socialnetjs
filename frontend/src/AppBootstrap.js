@@ -8,12 +8,12 @@ export default class AppBootstrap{
         let auth = new Auth();
         if('jwtToken' in localStorage){
 
-            let user  = { isAuthenticated: true , data:null , profile:{email:""} };            
+            let user  = { isAuthenticated: true , data:null , profile:{displayname:""} };            
             store.dispatch( actions.setUserAuth(user) );
             auth.setAuthorization(localStorage.getItem('jwtToken'));
             this.fetchUser().then(
                 res => {                    
-                    let user  = { isAuthenticated: true, data:null , profile: {...res.data} };
+                    let user  = { isAuthenticated: true, data:null , profile: {...res.data.profile} };
                     store.dispatch( actions.setUserAuth(user) );                    
                 },
                 error => {

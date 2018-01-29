@@ -20,7 +20,7 @@ var UserSchema = new mongoose.Schema({
             cb(docs.length == 0);
           });
         },
-        message: '‒ Email "{VALUE}" already exist!'
+        message: '‒ "{VALUE}" already exists!'
       }
     ]
   },
@@ -28,6 +28,9 @@ var UserSchema = new mongoose.Schema({
     type: String,
     require: true,
     minlength: [6 , "‒ Password required atleast 6 characters"]
+  },
+  profile : {
+    displayname : String
   },
   tokens: [{
     access: {
@@ -43,8 +46,8 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.methods.toJSON = function () {
   var user = this;
-  var {_id, email} = user.toObject();
-  return {_id, email};
+  var {_id, email , profile} = user.toObject();  
+  return {_id, email , profile};
 };
 
 UserSchema.methods.generateAuthToken = async function () {

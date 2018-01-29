@@ -81,7 +81,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    authInProcess : state.user.data.authInProcess
+    authInProcess : state.user.authInProcess
   };
 };
 

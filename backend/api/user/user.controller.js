@@ -13,7 +13,8 @@ class UserController{
             return res.status(400).send(response);
         }
         try {                                    
-            const user = new User({email: body.email.value , password: body.password.value});
+            let displayname = body.email.value.split('@')[0];            
+            const user = new User({email: body.email.value , password: body.password.value , profile:{displayname}});
             await user.save();
             var token = await user.generateAuthToken();            
             res.header('x-auth', token).send(user);
