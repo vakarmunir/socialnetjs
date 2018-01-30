@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {Row , Col , Alert , FormGroup, ControlLabel, FormControl, Button , Well} from 'react-bootstrap';
+import {Row , Col , messageBox , FormGroup, ControlLabel, FormControl, Button , Well} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import * as axios from 'axios';
@@ -8,6 +8,7 @@ import * as config from '../config/config';
 import LoginHelper from '../core/LoginHelper';
 import Auth from '../core/Auth';
 import * as actions from '../store/actions/index'
+import MessagesBox from '../components/MessagesBox';
 
 class Login extends Component {
   
@@ -34,12 +35,11 @@ class Login extends Component {
 
   render() {    
         
-    let alert = null;
+    let messageBox = null;    
     if(this.props.user.data.message.type) {      
-      let alertMessages = this.props.user.data.message.messages.map( (msg , i) => <p key={i}>{msg}</p> );
-      alert = <Alert bsStyle={this.props.user.data.message.type === "error" ? "danger" : "alert-message"}>{alertMessages}</Alert>
+      messageBox = <MessagesBox messages={this.props.user.data.message.messages} type={this.props.user.data.message.type} />
     }
-
+    
     let isLoginBtnDisabled = this.props.authInProcess;
 
     return (
@@ -47,7 +47,7 @@ class Login extends Component {
         <Row>
           <Col xs={4} md={4}>
             <Well bsSize="large">
-              {alert}
+              {messageBox}
               <form>                                
                 <FormGroup controlId="email" validationState={this.props.user.data.email.validationState}>
                   <ControlLabel>Email</ControlLabel>

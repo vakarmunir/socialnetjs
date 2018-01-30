@@ -13,21 +13,21 @@ var UserSchema = new mongoose.Schema({
     validate: [
       {
         validator: validator.isEmail,
-        message: '‒ "{VALUE}" is not a valid email'
+        message: '"{VALUE}" is not a valid email'
       },{
         validator: function(v, cb) {
           User.find({email: v}, function(err,docs){            
             cb(docs.length == 0);
           });
         },
-        message: '‒ "{VALUE}" already exists!'
+        message: '"{VALUE}" already exists!'
       }
     ]
   },
   password: {
     type: String,
     require: true,
-    minlength: [6 , "‒ Password required atleast 6 characters"]
+    minlength: [6 , "Password required atleast 6 characters"]
   },
   profile : {
     displayname : String
