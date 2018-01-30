@@ -20,7 +20,7 @@ const reducer = ( state = {...initialState()}, action ) => {
             const newState = {...state};                         
             newState.authInProcess = action.authInProcessFlag;           
             return {...newState}
-        case actionTypes.USER_LOGOUT:            
+        case actionTypes.USER_LOGOUT_STATE_UPDATE:          
             return {...initialState()};
         case actionTypes.SET_USER_AUTH:
             if(action.user.data !== null){

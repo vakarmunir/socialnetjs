@@ -81,3 +81,15 @@ export function * registerUserSaga(action){
   }
   yield put( actions.authInProcess(false) );
 }
+
+export function* logoutUserSaga(action){
+  try{
+    yield axios.delete(`${config.API_HOST}/user/me/token`);
+    let auth = new Auth();
+    yield auth.setAuthorization(false);            
+    yield localStorage.removeItem('jwtToken');
+  }catch(e){
+    console.log("logout Failed === " , action);
+  }  
+  yield put( actions.logoutStateUpdate() );
+}

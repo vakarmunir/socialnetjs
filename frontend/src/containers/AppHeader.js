@@ -14,15 +14,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 class AppHeader extends Component {
     logout(e){                
         e.preventDefault();
-        axios.delete(`${config.API_HOST}/user/me/token`).then(res => {            
-            let auth = new Auth();
-            auth.setAuthorization(false);            
-            localStorage.removeItem('jwtToken');
-            this.props.logout();
-        })
-        .catch(err => {
-            console.log('err on logout == ' , err);
-        });                       
+        this.props.logout();                              
     }
     render() {
         

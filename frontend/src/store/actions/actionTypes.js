@@ -4,4 +4,5 @@ export const AUTH_USER = 'AUTH_USER';
 export const REGISTER_USER = 'REGISTER_USER';
 export const SET_USER_AUTH = 'SET_USER_AUTH';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGOUT_STATE_UPDATE = 'USER_LOGOUT_STATE_UPDATE';
 export const AUTH_IN_PROCESS = 'AUTH_IN_PROCESS';

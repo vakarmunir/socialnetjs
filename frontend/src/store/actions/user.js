@@ -17,6 +17,11 @@ export const logout = () => {
         type: actionTypes.USER_LOGOUT        
     }
 }
+export const logoutStateUpdate = () => {
+    return {
+        type: actionTypes.USER_LOGOUT_STATE_UPDATE        
+    }
+}
 export const setUserAuth = (user) => {
     return {
         type : actionTypes.SET_USER_AUTH,

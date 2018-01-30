@@ -6,4 +6,5 @@ export function* watchAuth()
 {
     yield takeEvery(actionTypes.AUTH_USER , userSagas.authUserSaga);
     yield takeEvery(actionTypes.REGISTER_USER , userSagas.registerUserSaga);
+    yield takeEvery(actionTypes.USER_LOGOUT , userSagas.logoutUserSaga);
 }
