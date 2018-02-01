@@ -4,7 +4,7 @@ import { Route , Redirect , Switch , withRouter } from 'react-router-dom';
 import {Row , Col } from 'react-bootstrap';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Forum from './pages/Forum';
+import Index from './pages/Index';
 import AppHeader from './containers/AppHeader';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
@@ -16,21 +16,26 @@ class App extends Component {
       <Switch>
         <Route path="/login" render={props => !this.props.user.isAuthenticated ? <Login/> : <Redirect to="/" />} />
         <Route path="/register" render={props => !this.props.user.isAuthenticated ? <Register /> : <Redirect to="/" />} />
-        <Route exact path="/" component={Forum} />                                        
+        <Route exact path="/" component={Index} />                                        
       </Switch>
     );
 
     return (
       <div className="container">
-
         <Row>
         <Col xs={12} md={12}>
           <AppHeader />
         </Col>          
         </Row>        
         <Row>
-          <Col xs={12} md={12}>
+          <Col xs={12} md={2}>
+            left
+          </Col>
+          <Col xs={12} md={8}>
             {routes}
+          </Col>
+          <Col xs={12} md={2}>
+            right
           </Col>
         </Row>
       </div>

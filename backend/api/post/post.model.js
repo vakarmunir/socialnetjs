@@ -3,16 +3,14 @@ var {ObjectId} = mongoose;
 var Schema = mongoose.Schema;
 
 postSchema = new Schema({
-    threadId: {
-        type: Number,
-        required: [true, 'thread not associated']
-    },
-    replyToId: {
-        type: Number        
-    },
-    subject: {
+    postType: {
         type: String,
-        required: [true , 'Subjet is required!']
+        required: [true, 'no type associated'],
+        default: "post"
+    },    
+    content: {
+        type: String,
+        required: [true , 'Please write something first!']
     },
     views: {
         type: Number,
@@ -22,8 +20,8 @@ postSchema = new Schema({
         type: Boolean,
         default: false
     },
-    user: {
-        type: Number,
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
         required: [true, 'user not associated']
     }
 });

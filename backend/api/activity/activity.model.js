@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ActivitySchema = mongoose.Schema({
-    published : {type:Date, Default:Date.now},
+    published : {type:Date, default:Date.now},
     actor : {
         objectType : {type: String},
         _id : {type: mongoose.Schema.Types.ObjectId} //userId
