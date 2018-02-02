@@ -48,7 +48,7 @@ class AppHeader extends Component {
                 <Navbar inverse fluid={true}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            ForumJS
+                            SocialnetJS
                         </Navbar.Brand>
                         <Navbar.Toggle />                        
                     </Navbar.Header>                    

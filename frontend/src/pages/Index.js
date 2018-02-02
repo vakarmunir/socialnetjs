@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row , Col , Panel , Table , Image , FormGroup , ControlLabel , FormControl} from 'react-bootstrap';
+import {Row , Col , Panel , Table , Image , FormGroup , ControlLabel , FormControl , Button , Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import man from '../images/man.png'
@@ -17,11 +17,18 @@ class Index extends Component {
                                     <Image src={man} circle width="50" />
                                 </Col>                            
                                 <Col xs={6} md={11}>
-                                    <form>
-                                        <FormGroup controlId="formControlsTextarea">                                            
-                                            <FormControl componentClass="textarea" placeholder="textarea" />
+                                    <Form horizontal>
+                                        <FormGroup controlId="formControlsTextarea">
+                                            <Col md={12}>
+                                                <FormControl componentClass="textarea" placeholder="What's in your mind ?" />
+                                            </Col>                                            
                                         </FormGroup>
-                                    </form>
+                                        <FormGroup>
+                                            <Col mdOffset={10} md={2}>
+                                            <Button bsStyle="primary">Post It ...</Button>
+                                            </Col>
+                                        </FormGroup>
+                                    </Form>
                                 </Col>
                             </Row>
                         </Panel>

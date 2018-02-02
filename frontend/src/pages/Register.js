@@ -17,7 +17,7 @@ class Register extends Component {
                 </Row>
             </div>    
         );        
-    }      
+    }
 }
 
 const mapDispatchToProps = dispatch => {

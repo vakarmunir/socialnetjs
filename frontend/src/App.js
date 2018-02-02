@@ -27,15 +27,12 @@ class App extends Component {
           <AppHeader />
         </Col>          
         </Row>        
-        <Row>
-          <Col xs={12} md={2}>
-            left
-          </Col>
+        <Row>          
           <Col xs={12} md={8}>
             {routes}
           </Col>
-          <Col xs={12} md={2}>
-            right
+          <Col xs={12} md={4}>
+            
           </Col>
         </Row>
       </div>
