@@ -10,7 +10,10 @@ import * as userWatcher from './store/sagas/index';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+
 import user from './store/reducers/user';
+import post from './store/reducers/post';
+
 import AppBootstrap from './AppBootstrap'
 
 const composeEnhancers = 
@@ -19,7 +22,7 @@ process.env.NODE_ENV === "development" && window.__REDUX_DEVTOOLS_EXTENSION_COMP
 : null || compose;
 
 const rootReducer = combineReducers({
-    user    
+    user , post    
 });
 
 const sagaMiddleWare = createSagaMiddleware();

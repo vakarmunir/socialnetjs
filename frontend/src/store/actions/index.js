@@ -6,3 +6,5 @@ export {
     setUserAuth,
     authInProcess
 } from './user';
+
+export {postStatus} from './post';
