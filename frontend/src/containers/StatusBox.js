@@ -23,7 +23,7 @@ class StatusBox extends Component{
         this.setState({post,postButton});
     }
     postStatus(){
-        let data = {post: this.state.post , user:{email:this.props.userEmail}}
+        let data = { post: {...this.state.post} , user:{...this.props.user} }        
         this.props.postStatus(data);        
     }
     render(){
@@ -43,7 +43,7 @@ class StatusBox extends Component{
                                 </FormGroup>
                                 <FormGroup>
                                     <Col mdOffset={10} md={2}>
-                                        <Button bsStyle="primary" onClick={this.postStatus.bind(this)} disabled={this.state.postButton.disabled}>Post It ...</Button>
+                                        <Button bsStyle="primary" onClick={this.postStatus.bind(this)} disabled={this.state.postButton.disabled || this.props.postInProcess}>Post It ...</Button>
                                     </Col>
                                 </FormGroup>
                             </Form>                            
@@ -57,7 +57,7 @@ class StatusBox extends Component{
                     {JSON.stringify(this.props.post)}
                 </p>
                 <p>
-                    {JSON.stringify(this.props.userEmail)}
+                    {JSON.stringify(this.props.user)}
                 </p>
             </div>
         );
@@ -72,6 +72,7 @@ const mapDispatchToProps = dispatch =>{
 const mapStateToProps = state => {
     return {
         post: state.post,
+        postInProcess: state.post.data.inProcess,
         user: {email: state.user.email}
     }
 };

@@ -12,16 +12,16 @@ const initialState = () => {
 }
 
 const reducer = (state = {...initialState()} , action ) => {
-    switch(action.type){
-        case actionTypes.POST_IN_PROCESS:
-            const newState = {...state};
-            newState.data.inProcess = action.postInProcess;
-            return {...newState};
+    switch(action.type){        
         case actionTypes.POST_STATUS:                        
             return {...state , ...action.post};
+        case actionTypes.POST_IN_PROCESS:
+            const newStateInProcess = {...state};
+            newStateInProcess.data.inProcess = action.postInProcessFlag;            
+            return {...newStateInProcess};
         default:
             return {...state};
-    }    
+    }
 }
 
 export default reducer;

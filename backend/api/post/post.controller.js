@@ -1,5 +1,9 @@
 var {ObjectId} = require('mongodb');
 var Post = require('./post.model');
+var User = require('../user/user.model');
+var Activity = require('../activity/activity.model');
+var {ObjectId} = require('mongodb');
+var {waitTest} = require('../../utils/index');
 
 class PostController{
     async getAllPosts(req , res){
@@ -10,6 +14,7 @@ class PostController{
             res.status(400).send(e);
         }    
     }
+
     async getOnePost(req , res){
         let id = req.params.id;
         if(!ObjectId.isValid(id)){
@@ -22,12 +27,25 @@ class PostController{
             res.status(400).send(e);
         }
     }
-    async createPost(req , res){
+    
+    async createPost(req , res){        
         try{
-            var thread = new Post({...req.body});
-            var threadGen = await thread.save();        
-            res.status(201).send(threadGen);
+            const userReq = {...req.body.user};
+            const postReq = {...req.body.post};
+            const user = await User.findOne({email: userReq.email});          
+            var post = new Post({
+                content: postReq.content,
+                userId: user._id
+            });
+            var postGen = await post.save();                             
+            const actor = {_id: user._id};
+            const object = {_id: postGen._id};
+            const activity = new Activity({actor,object});
+            const activityGen = await activity.save();
+            console.log("activityGen === ", activityGen);
+            res.status(201).send(postGen);
         }catch(e){
+            console.log("Exceptio: ",e);
             res.status(400).send(e);
         }
     }

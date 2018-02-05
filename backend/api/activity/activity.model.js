@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const ActivitySchema = mongoose.Schema({
     published : {type:Date, default:Date.now},
     actor : {
-        objectType : {type: String},
+        objectType : {type: String, default: 'user'}, //user, page, group
         _id : {type: mongoose.Schema.Types.ObjectId} //userId
     },
-    verb: {type:String , Default:"post"}, //share , like
+    verb: {type:String , default:"posted"}, //shared , liked
     object : {
-        objectType : {type: String},
+        objectType : {type: String, default: 'post'},
         _id : {type: mongoose.Schema.Types.ObjectId} //postId (vid,aud,img)
     },
     target : {

@@ -4,10 +4,10 @@ import * as config from '../../config/config';
 import * as actions from '../actions/index';
 
 export function* postStatusSaga(action){
-  //yield put( actions.authInProcess(true) );
-  const data = {...action.data};      
+  yield put( actions.postInProcess(true) );
+  const data = {...action.data};        
   try{
-    var res = yield axios.post(`${config.API_HOST}/post`, {content} );
+    var res = yield axios.post(`${config.API_HOST}/post`, data );
     console.log("ress ===== ",res);
     //const profile = {...res.data.profile};
     //yield put( actions.setUserAuth( { isAuthenticated: true, data : null , email:res.data.email , profile } ) );
@@ -21,5 +21,5 @@ export function* postStatusSaga(action){
     }*/
     //yield put( actions.setUserAuth( { isAuthenticated: false, data  , profile : null} ) );
   }
-  //yield put( actions.authInProcess(false) );
+  yield put( actions.postInProcess(false) );
 }

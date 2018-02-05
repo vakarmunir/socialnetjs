@@ -26,5 +26,10 @@ postSchema = new Schema({
     }
 });
 
+postSchema.methods.toJSON = function(){
+    var post = this;
+    var {_id , content} = post.toObject();
+    return {_id , content};
+}
 var post = mongoose.model('Post',postSchema);
 module.exports =  post;

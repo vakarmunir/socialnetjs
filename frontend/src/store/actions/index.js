@@ -7,4 +7,4 @@ export {
     authInProcess
 } from './user';
 
-export {postStatus} from './post';
+export {postStatus,postInProcess} from './post';

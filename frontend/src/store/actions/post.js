@@ -6,3 +6,10 @@ export const postStatus = (data) => {
         data
     }
 }
+
+export const postInProcess = postInProcessFlag => {
+    return {
+        type: actionTypes.POST_IN_PROCESS,
+        postInProcessFlag
+    }
+}
