@@ -1,8 +1,8 @@
 import * as actionTypes from './actionTypes';
 
-export const postStatus = (post) => {
+export const postStatus = (data) => {    
     return {
         type: actionTypes.POST_STATUS,
-        post: post
+        data
     }
 }

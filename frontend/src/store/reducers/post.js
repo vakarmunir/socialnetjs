@@ -17,7 +17,7 @@ const reducer = (state = {...initialState()} , action ) => {
             const newState = {...state};
             newState.data.inProcess = action.postInProcess;
             return {...newState};
-        case actionTypes.POST_STATUS:            
+        case actionTypes.POST_STATUS:                        
             return {...state , ...action.post};
         default:
             return {...state};
