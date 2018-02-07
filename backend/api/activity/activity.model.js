@@ -4,7 +4,7 @@ const ActivitySchema = mongoose.Schema({
     published : {type:Date, default:Date.now},
     actor : {
         objectType : {type: String, default: 'user'}, //user, page, group
-        _id : {type: mongoose.Schema.Types.ObjectId , ref: 'Usser'} //userId
+        _id : {type: mongoose.Schema.Types.ObjectId , ref: 'User'} //userId
     },
     verb: {type:String , default:"posted"}, //shared , liked
     object : {

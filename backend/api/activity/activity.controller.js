@@ -4,8 +4,9 @@ var Activity = require('./activity.model');
 class ActivityController{
     async getAllActivities(req , res){
         try{
-            const activities = await Activity.find();        
-            res.status(200).send(activities);
+            const activities = await Activity.findOne({_id:'5a78ac89d6d99f07e3ab3fb2'})
+            .populate("object._id");
+            res.status(200).set({ 'content-type': 'application/json;charset=utf-8' }).json(activities);
         }catch(e){
             res.status(400).send(e);
         }    

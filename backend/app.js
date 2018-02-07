@@ -12,6 +12,7 @@ var index = require('./routes/index');
 var threads = require('./api/thread/thread.routes');
 var posts = require('./api/post/post.routes');
 var users = require('./api/user/user.routes');
+var activity = require('./api/activity/activity.routes');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/', index);
 app.use('/threads', threads);
 app.use('/post', posts);
 app.use('/user', users);
+app.use('/activity', activity);
 
 
 // catch 404 and forward to error handler
