@@ -2,18 +2,15 @@ const mongoose = require("mongoose");
 
 const ActivitySchema = mongoose.Schema({
     published : {type:Date, default:Date.now},
-    actor : {
-        objectType : {type: String, default: 'user'}, //user, page, group
-        _id : {type: mongoose.Schema.Types.ObjectId , ref: 'User'} //userId
+    actor : {        
+        user : {type: mongoose.Schema.Types.ObjectId , ref: 'Users'}
     },
     verb: {type:String , default:"posted"}, //shared , liked
-    object : {
-        objectType : {type: String, default: 'post'},
-        _id : {type: mongoose.Schema.Types.ObjectId, ref: 'Post'} //postId (vid,aud,img)
+    object : {        
+        post : {type: mongoose.Schema.Types.ObjectId, ref: 'Post'}
     },
-    target : {
-        objectType : {type: String},
-        _id : {type: mongoose.Schema.Types.ObjectId , ref: 'Post'} //postId (in album)
+    target : {        
+        post : {type: mongoose.Schema.Types.ObjectId , ref: 'Post'}
     },
 });
 

@@ -38,12 +38,14 @@ class PostController{
                 userId: user._id
             });
             var postGen = await post.save();                             
-            const actor = {_id: user._id};
-            const object = {_id: postGen._id};
+            const actor = {user: user._id};
+            const object = {post: postGen._id};
+            
             const activity = new Activity({actor,object});
             const activityGen = await activity.save();
-            console.log("activityGen === ", activityGen);
-            res.status(201).send(postGen);
+            const activityEntity = await Activity.findOne({_id: activityGen._id}).populate('object.post');
+            
+            res.status(201).send(activityEntity);
         }catch(e){
             console.log("Exceptio: ",e);
             res.status(400).send(e);

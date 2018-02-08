@@ -8,7 +8,10 @@ export function* postStatusSaga(action){
   const data = {...action.data};        
   try{
     var res = yield axios.post(`${config.API_HOST}/post`, data );
-    console.log("ress ===== ",res);
+    const activity = {...res.data};
+    const post  = {...activity.object.post}
+    console.log("activity ===== ",activity);
+    console.log("post ===== ",post);
     //const profile = {...res.data.profile};
     //yield put( actions.setUserAuth( { isAuthenticated: true, data : null , email:res.data.email , profile } ) );
   }catch(e){
