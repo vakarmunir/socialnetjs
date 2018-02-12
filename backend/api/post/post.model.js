@@ -31,5 +31,5 @@ postSchema.methods.toJSON = function(){
     var {_id , content , postType , views, sticky} = post.toObject();
     return {_id , content , postType , views, sticky};
 }
-var post = mongoose.model('Post',postSchema);
+var post = mongoose.model('Post', postSchema);
 module.exports =  post;

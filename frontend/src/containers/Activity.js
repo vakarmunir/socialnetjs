@@ -8,10 +8,10 @@ class Activity extends Component{
             <div>
                 <Panel>
                     <Row>
-                        <Col xs={12} md={12}>Some post at 64:4:00</Col>
+                        <Col xs={12} md={12}>{this.props.userDisplayName} {this.props.action} at {this.props.publishedAt}</Col>
                     </Row>
                     <Row>
-                        <Col xs={12} md={12}>sdfsfdsfsfsfsfsdfsfs</Col>
+                        <Col xs={12} md={12}>{this.props.content}</Col>
                     </Row>
                 </Panel>
             </div>

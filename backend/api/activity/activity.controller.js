@@ -4,9 +4,9 @@ var Activity = require('./activity.model');
 class ActivityController{
     async getAllActivities(req , res){
         try{
-            const activities = await Activity.find()
+            const activities = await Activity.find().sort('-published')
             .populate("object.post", "content")            
-            .populate("actor.user" , "profile.displayname");            
+            .populate("actor.user" , "profile.displayname");
             res.status(200).set({ 'content-type': 'application/json;charset=utf-8' }).json(activities);
         }catch(e){
             res.status(400).send(e);

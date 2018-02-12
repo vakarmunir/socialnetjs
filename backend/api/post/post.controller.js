@@ -43,8 +43,7 @@ class PostController{
             
             const activity = new Activity({actor,object});
             const activityGen = await activity.save();
-            const activityEntity = await Activity.findOne({_id: activityGen._id}).populate('object.post');
-            
+            const activityEntity = await Activity.findOne({_id: activityGen._id}).populate('object.post', 'content').populate('actor.user', 'profile.displayname');            
             res.status(201).send(activityEntity);
         }catch(e){
             console.log("Exceptio: ",e);

@@ -9,8 +9,7 @@ const initialState = () => {
 const reducer = (state = initialState() , action) => {
     switch(action.type){
         case actionTypes.ADD_ACTIVITY:            
-            const newActivities = [...state.activities];
-            newActivities.push(action.activity);            
+            const newActivities = [action.activity, ...state.activities];            
             return {...state, activities:newActivities};
         case actionTypes.LOAD_ACTIVITIES_DATA:            
             const newActivitiesData = [...action.activities];                        

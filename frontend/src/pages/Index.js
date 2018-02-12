@@ -17,7 +17,7 @@ class Index extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <Activities />                        
+                        {<Activities />}
                     </Col>
                 </Row>
             </div>    

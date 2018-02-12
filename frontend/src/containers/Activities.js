@@ -10,7 +10,19 @@ class Activities extends Component{
     }
 
     render(){
-        let activities = this.props.activities.map(activity => <Activity />);
+        let activities = this.props.activities.map(
+            activity => {                
+                return (
+                    <Activity 
+                        key={activity._id} 
+                        userDisplayName={activity.actor.user.profile.displayname} 
+                        action={activity.verb} 
+                        publishedAt={activity.publishedTimeSpan}
+                        content = {activity.object.post.content} 
+                    />
+                );
+            }
+        );
         return(
             <div>
                 {activities}                

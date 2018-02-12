@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require('moment');
 
 const ActivitySchema = mongoose.Schema({
     published : {type:Date, default:Date.now},
@@ -14,5 +15,13 @@ const ActivitySchema = mongoose.Schema({
     },
 });
 
-const Activity = mongoose.model("Activity",ActivitySchema);
+ActivitySchema.methods.toJSON = function(){
+    var activity = this;
+    var {_id, published, actor, verb, object, target} = activity.toObject();    
+    var publishedTimeSpan = moment(published).fromNow();
+    console.log("published ===> " , publishedTimeSpan);
+    //return activity.toObject();
+    return {_id, published, actor, verb, object, target, publishedTimeSpan};
+}
+const Activity = mongoose.model("Activity", ActivitySchema);
 module.exports = Activity;
