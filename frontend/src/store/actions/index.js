@@ -6,5 +6,5 @@ export {
     setUserAuth,
     authInProcess
 } from './user';
-
-export {postStatus,postInProcess} from './post';
+export {postStatus,postInProcess,setPost} from './post';
+export {addActivity, loadActivities, loadActivitiesData} from './activity';

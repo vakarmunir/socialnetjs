@@ -2,6 +2,7 @@ import {takeEvery} from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
 import * as userSagas from './user';
 import * as postSagas from './post';
+import * as activitySagas from './activity';
 
 export function* watchAuth()
 {
@@ -12,4 +13,8 @@ export function* watchAuth()
 export function* watchPost()
 {
     yield takeEvery(actionTypes.POST_STATUS , postSagas.postStatusSaga);    
+}
+export function* watchActivity()
+{
+    yield takeEvery(actionTypes.LOAD_ACTIVITIES, activitySagas.loadActivitiesSaga)
 }

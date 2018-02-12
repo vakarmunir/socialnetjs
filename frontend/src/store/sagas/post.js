@@ -10,19 +10,12 @@ export function* postStatusSaga(action){
     var res = yield axios.post(`${config.API_HOST}/post`, data );
     const activity = {...res.data};
     const post  = {...activity.object.post}
-    console.log("activity ===== ",activity);
-    console.log("post ===== ",post);
-    //const profile = {...res.data.profile};
-    //yield put( actions.setUserAuth( { isAuthenticated: true, data : null , email:res.data.email , profile } ) );
+    const {content,postType} = post;
+    yield put(actions.setPost({content,postType}));
+    yield put(actions.addActivity(activity));        
   }catch(e){
     const res = e.response;
-    console.log("res err ==== " , res);      
-    /*const data = {
-      email: {...res.data.email},
-      password: {...res.data.password},
-      message:{type:'error' , messages: [...res.data.messages] }
-    }*/
-    //yield put( actions.setUserAuth( { isAuthenticated: false, data  , profile : null} ) );
+    console.log("Something went wrong : " , res.data);          
   }
   yield put( actions.postInProcess(false) );
 }

@@ -9,3 +9,8 @@ export const AUTH_IN_PROCESS = 'AUTH_IN_PROCESS';
 
 export const POST_IN_PROCESS = 'POST_IN_PROCESS';
 export const POST_STATUS = 'POST_STATUS';
+export const SET_POST = 'SET_POST';
+
+export const ADD_ACTIVITY = 'ADD_ACTIVITY';
+export const LOAD_ACTIVITIES = 'LOAD_ACTIVITIES';
+export const LOAD_ACTIVITIES_DATA = 'LOAD_ACTIVITIES_DATA';

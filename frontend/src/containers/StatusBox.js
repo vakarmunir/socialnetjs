@@ -49,16 +49,7 @@ class StatusBox extends Component{
                             </Form>                            
                         </Col>
                     </Row>
-                </Panel>
-                <p>
-                    {JSON.stringify(this.state)}
-                </p>
-                <p>
-                    {JSON.stringify(this.props.post)}
-                </p>
-                <p>
-                    {JSON.stringify(this.props.user)}
-                </p>
+                </Panel>                
             </div>
         );
     }

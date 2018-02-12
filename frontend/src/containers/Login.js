@@ -62,8 +62,7 @@ class Login extends Component {
                 <FormGroup controlId="login">
                   <Button bsStyle="primary" onClick={this.login.bind(this)} disabled={isLoginBtnDisabled}>Login</Button>                  
                 </FormGroup>
-              </form>
-              {/*JSON.stringify(this.props.user)*/}                            
+              </form>                                          
             </Well>                                      
           </Col>
         </Row>

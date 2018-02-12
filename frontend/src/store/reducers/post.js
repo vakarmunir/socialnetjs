@@ -19,6 +19,9 @@ const reducer = (state = {...initialState()} , action ) => {
             const newStateInProcess = {...state};
             newStateInProcess.data.inProcess = action.postInProcessFlag;            
             return {...newStateInProcess};
+        case actionTypes.SET_POST:
+            const postToSet = {...state, ...action.post};
+            return postToSet;
         default:
             return {...state};
     }

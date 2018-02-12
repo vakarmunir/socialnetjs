@@ -13,6 +13,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import user from './store/reducers/user';
 import post from './store/reducers/post';
+import activity from './store/reducers/activity';
 
 import AppBootstrap from './AppBootstrap'
 
@@ -22,13 +23,14 @@ process.env.NODE_ENV === "development" && window.__REDUX_DEVTOOLS_EXTENSION_COMP
 : null || compose;
 
 const rootReducer = combineReducers({
-    user , post    
+    user, post, activity    
 });
 
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore( rootReducer , composeEnhancers(applyMiddleware(thunk , sagaMiddleWare)) );
 sagaMiddleWare.run(sagaWatcher.watchAuth);
 sagaMiddleWare.run(sagaWatcher.watchPost);
+sagaMiddleWare.run(sagaWatcher.watchActivity);
 
 let appBootstrap = new AppBootstrap(store);
 

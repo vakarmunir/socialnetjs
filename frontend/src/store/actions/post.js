@@ -13,3 +13,10 @@ export const postInProcess = postInProcessFlag => {
         postInProcessFlag
     }
 }
+
+export const setPost = post => {
+    return {
+        type: actionTypes.SET_POST,
+        post
+    }
+}

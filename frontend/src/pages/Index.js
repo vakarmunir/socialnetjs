@@ -3,6 +3,7 @@ import {Row , Col , Panel , Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import StatusBox from '../containers/StatusBox';
+import Activities from '../containers/Activities';
 
 class Index extends Component {
     render() {
@@ -16,29 +17,7 @@ class Index extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <Panel header="Threads" bsStyle="primary">
-                            <Table responsive>
-                                <thead>
-                                    <tr>                                    
-                                        <th>Threads</th>
-                                        <th>Views</th>
-                                        <th>Author</th>                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>                                    
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>                                    
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>                                    
-                                        <td>Table cell</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </Panel>
+                        <Activities />                        
                     </Col>
                 </Row>
             </div>    
