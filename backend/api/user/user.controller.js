@@ -76,6 +76,15 @@ class UserController{
             res.status(400).send();
         }
     }
+
+    async allUsers(req,res){
+        try{
+            let users = await User.find();            
+            res.status(200).send(users);
+        }catch(e){
+            res.status(400).send();
+        }
+    }
 }
 
 module.exports = UserController;

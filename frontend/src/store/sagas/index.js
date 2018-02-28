@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 import * as userSagas from './user';
 import * as postSagas from './post';
 import * as activitySagas from './activity';
+import * as connectSaga from './connect';
 
 export function* watchAuth()
 {
@@ -17,4 +18,8 @@ export function* watchPost()
 export function* watchActivity()
 {
     yield takeEvery(actionTypes.LOAD_ACTIVITIES, activitySagas.loadActivitiesSaga)
+}
+export function* watchConnect()
+{
+    yield takeEvery(actionTypes.LOAD_PEOPLE, connectSaga.loadPeople);
 }

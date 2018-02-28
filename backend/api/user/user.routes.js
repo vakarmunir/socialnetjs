@@ -10,6 +10,7 @@ router.use(cors(corsOptions));
 var  UserController = require('./user.controller');
 
 userController = new UserController();
+router.get('/all' , authenticate , userController.allUsers);
 router.get('/me' , authenticate , userController.me);
 router.post('/' , userController.create);
 router.post('/login' , userController.login);

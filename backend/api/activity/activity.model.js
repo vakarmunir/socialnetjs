@@ -18,9 +18,7 @@ const ActivitySchema = mongoose.Schema({
 ActivitySchema.methods.toJSON = function(){
     var activity = this;
     var {_id, published, actor, verb, object, target} = activity.toObject();    
-    var publishedTimeSpan = moment(published).fromNow();
-    console.log("published ===> " , publishedTimeSpan);
-    //return activity.toObject();
+    var publishedTimeSpan = moment(published).fromNow();        
     return {_id, published, actor, verb, object, target, publishedTimeSpan};
 }
 const Activity = mongoose.model("Activity", ActivitySchema);

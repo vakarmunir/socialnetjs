@@ -6,6 +6,7 @@ export const SET_USER_AUTH = 'SET_USER_AUTH';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGOUT_STATE_UPDATE = 'USER_LOGOUT_STATE_UPDATE';
 export const AUTH_IN_PROCESS = 'AUTH_IN_PROCESS';
+export const LOAD_PEOPLE = 'LOAD_PEOPLE';
 
 export const POST_IN_PROCESS = 'POST_IN_PROCESS';
 export const POST_STATUS = 'POST_STATUS';
