@@ -8,4 +8,4 @@ export {
 } from './user';
 export {postStatus,postInProcess,setPost} from './post';
 export {addActivity, loadActivities, loadActivitiesData} from './activity';
-export {loadPeople} from './connect';
+export {loadPeople, loadPeopleData} from './connect';

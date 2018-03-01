@@ -8,7 +8,7 @@ import Index from './pages/Index';
 import AppHeader from './containers/AppHeader';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import People from './containers/People';
+import WhoToFollow from './containers/WhoToFollow';
 
 class App extends Component {  
   render() {
@@ -33,7 +33,7 @@ class App extends Component {
             {routes}
           </Col>
           <Col xs={12} md={4}>
-            <People />
+            <WhoToFollow />
           </Col>
         </Row>
       </div>

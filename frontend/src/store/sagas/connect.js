@@ -8,10 +8,9 @@ export function* loadPeople()
 {
     try{
         const res = yield axios.get(`${config.API_HOST}/user/all`);
-        //console.log("users === " , res);
         const people = [...res.data];
         yield put( actions.loadPeopleData(people) );
     }catch(e){
-        console.log("people could'nt be loaded!");
+        console.log("people could'nt be loaded! ", e);
     }    
 }
